@@ -28,8 +28,8 @@ const jugar = (puntosDiversion) => {
   console.log(`Que divertido! La felicidad de ${nombreMascota} ha aumentado. Felicidad: ${nivelFelicidad}/100.`);
 };
  
-alimentar(5); 
-jugar(40);
+alimentar(); 
+jugar();
 
 mostrarEstado()
 
@@ -75,6 +75,71 @@ function diagnosticoMascota() {
   }
 }
 
-simularPasoDelTiempo(15);
-diagnosticoMascota(5);
+simularPasoDelTiempo();
+diagnosticoMascota();
 
+
+function iniciarCuidado() {
+  console.log(`\n¡Hola! Es hora de cuidar a ${nombreMascota}.`);
+
+  while (true) {
+    let opcion = prompt(`
+Menú de Cuidado de Mascota:
+1 - Alimentar a la mascota
+2 - Jugar con la mascota
+3 - Simular el paso del tiempo
+4 - Ver diagnóstico de la mascota
+5 - Mostrar estado actual
+6 - Despedirse de la mascota
+
+Ingresa el número de tu opción:`);
+
+  
+    switch (opcion) {
+      case '1':
+        let comidaStr = prompt("¿Cuántos puntos de comida quieres darle? (Ej: 20)");
+        let puntosComida = parseInt(comidaStr); 
+        if (!isNaN(puntosComida) && puntosComida > 0) {
+          alimentar(puntosComida);
+        } else {
+          console.log("\nOpción no válida. Por favor, ingresa una cantidad numérica positiva.");
+        }
+        break;
+      
+      case '2':
+        let diversionStr = prompt("¿Cuántos puntos de diversión quieres darle? (Ej: 20)");
+        let puntosDiversion = parseInt(diversionStr); 
+        if (!isNaN(puntosDiversion) && puntosDiversion > 0) {
+          jugar(puntosDiversion);
+        } else {
+          console.log("\nOpción no válida. Por favor, ingresa una cantidad numérica positiva.");
+        }
+        break;
+      
+      case '3':
+        simularPasoDelTiempo();
+        break;
+      
+      case '4':
+        diagnosticoMascota();
+        break;
+      
+      case '5':
+        console.log("\n--- Estado Actual ---");
+        mostrarEstado();
+        console.log("---------------------");
+        break;
+      
+      case '6':
+        
+        console.log(`\n${nombreMascota} Te dice: Adiós, gracias por cuidar de mí. El simulador ha finalizado.`);
+        return; 
+      
+      default:
+        console.log("\nOpción no válida. Por favor, elige un número del 1 al 6.");
+        break;
+    }
+  }
+}
+
+iniciarCuidado(); 
